@@ -9,3 +9,6 @@ build/
 .env
 .env.local
 .env.*.local
+# Environment files
+.env
+Backend/.env
