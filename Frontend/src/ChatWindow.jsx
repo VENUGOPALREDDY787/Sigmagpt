@@ -1,6 +1,11 @@
 import "./ChatWindow.css";
 import Chat from "./Chat";
+import { MyContext } from "./Mycontex";
+import { useContext } from "react";
+
+
 function ChatWindow() {
+  const { prompt,setPrompt,reply,setReply} = useContext(MyContext);
   return (
     <div className="chatWindow">
       <div className="navbar">
@@ -8,7 +13,7 @@ function ChatWindow() {
           Simagpt <i class="fa-solid fa-arrow-down"></i>
         </span>
         <div className="userIconDiv">
-          <span>
+          <span className="userIcon">
             <i class="fa-solid fa-user"></i>
           </span>
         </div>
