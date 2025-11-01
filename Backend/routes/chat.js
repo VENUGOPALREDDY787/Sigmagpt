@@ -62,11 +62,11 @@ if(!threadId || !message){
     req.status(400).json({error:"missing required field"});
 }
 try{
-    const thread = await Thread.findOne({threadId});
+    let thread = await Thread.findOne({threadId});
     
     if(!thread){
         //create a new thread is db
-        thread = new Thread({
+         thread = new Thread({
             threadId,
             title:message,
             messages:[{role:"user", content:message}]
@@ -74,7 +74,7 @@ try{
     }else{
         thread.messages.push({role: "user",content: message});
     }
-    const assistantreplay = getOpenAIAPIResponse(message);
+    const assistantreplay = await getOpenAIAPIResponse(message);
     thread.messages.push({role:"assistant",content:assistantreplay});
     thread.updatedAt = new Date();
     await thread.save();
