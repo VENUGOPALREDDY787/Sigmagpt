@@ -23,6 +23,6 @@ font-size:0.9rem;
  max-width: 500px;
  width:fit-content;
 }
-.gptMessage{
-
+.hljs{
+    border-radius:14px !important ;
 }
