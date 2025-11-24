@@ -1,6 +1,7 @@
 import express from 'express'
 const router  = express.Router();
 import Thread from "../models/Thread.js"
+import getOpenAiApiResponce from "../utils/openai.js"
 //test
 router.post("/text",async(req,res)=>{
     try{
@@ -51,6 +52,35 @@ router.delete("/thread/:threadId",async(req,res)=>{
     }catch(err){
         console.log(err);
         res.status(500).json({error:"Flaied to deltete the thread"});
+    }
+})
+
+
+router.post("/chat", async(req, res)=>{
+    const {threadId, message}=req.body;
+     if(!threadId || !message){
+            res.status(404).json({error:'missing reqired fileds'});
+        }
+    try{
+       const thread = await Thread.findById({threadId});
+       if(thread){
+         thread = new Thread({
+            threadId,
+            title:message,
+            messages:[{role:"user",content:message}]
+        })}
+        else{
+            thread.messages.push({role:"user",content:message});
+        }
+       const replay = await getOpenAiApiResponce( message );
+       thread.messages.push({role:"assistant", content:replay});
+       thread.updatedAt = new Date();
+       await thread.save();
+       res.json({reply:replay});
+re
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error:"unable to fleach the data"});
     }
 })
 export default router;

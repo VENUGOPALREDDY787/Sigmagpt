@@ -26,3 +26,5 @@ const getOpenAiApiResponce = async(message)=>{
     }
 
 }
+export default getOpenAiApiResponce;
+
