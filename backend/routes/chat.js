@@ -62,7 +62,7 @@ router.post("/chat", async(req, res)=>{
             res.status(404).json({error:'missing reqired fileds'});
         }
     try{
-       const thread = await Thread.findById({threadId});
+       let thread = await Thread.findById({threadId});
        if(thread){
          thread = new Thread({
             threadId,
