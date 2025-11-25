@@ -1,10 +1,13 @@
-import React from 'react';
+import React ,{useContext, useState} from 'react';
 import "./ChatWindow.css";
 import { Mycontext } from './MyContext.jsx';
 import Chat from './Chat.jsx';
+import {ScaleLoader} from "react-spinners";
 function ChatWindow() {
-    const {prompt ,setprompt,reply, setReply,currThreadId, setCurrThreadId} = Mycontext;
+    const {prompt ,setprompt,reply, setReply,currThreadId, setCurrThreadId} = useContext(Mycontext);
+    const [loading, setLoading] = useState(false);
     const getReply = async()=>{
+        setLoading(true);
         const options={
         method:'POST',
         headers:{
@@ -22,6 +25,7 @@ function ChatWindow() {
     } catch(err){
         console.log(err);
     }
+     setLoading(false);
     }
     return (<div className="chatWindow">
         <div className="navbar">
@@ -31,6 +35,9 @@ function ChatWindow() {
             </div>
         </div>
         <Chat></Chat>
+        <ScaleLoader color='#fff' loading={loading}>
+
+        </ScaleLoader>
         <div className="chatInput">
             <div className="userInput">
                 <input placeholder='Ask Somthing' value={prompt} onChange={(e)=> setprompt(e.target.value)}
