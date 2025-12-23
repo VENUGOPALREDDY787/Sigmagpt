@@ -83,3 +83,27 @@ color: #fff;
     padding:0.5rem;
     color:#b4b4b4;
 }
+.dropDown{
+    position: absolute;
+    top:4rem;
+    right:4rem;
+    width:150px;
+
+    background-color:#323232;
+    padding:0.3rem 0.5rem;
+    border-radius: 6px;
+    text-align: left;
+    z-index: 100;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+
+}
+.dropDownItem{
+    font-size: 0.9rem;
+    margin:0.3rem 0rem;
+    padding:0.5rem 0.2rem;
+    cursor: pointer;
+}
+.dropDownItem i{
+    background-color:rgba(180,180,180,0.1);
+    border-radius: 6px;
+}
