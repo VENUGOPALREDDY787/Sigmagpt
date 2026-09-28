@@ -1,0 +1,22 @@
+name: AIShield Security Debt Scan
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main]
+
+jobs:
+  security-debt-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run AIShield Analysis
+        uses: VENUGOPALREDDY787/AIShield/.github/actions/aishield-scan@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          fail-on-debt-increase: 'true'
